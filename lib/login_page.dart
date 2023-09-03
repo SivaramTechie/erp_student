@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:pocketbase/pocketbase.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'home_page.dart';
 
 class Login extends StatelessWidget {
-  const Login({super.key});
+  const Login({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +21,37 @@ class Login extends StatelessWidget {
               "Welcome to ERP",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
-            const Text("A simple way to track you attendance"),
+            const Text("A simple way to track your attendance"),
             const SizedBox(
               height: 30,
             ),
-            ElevatedButton(onPressed: () {}, child: Text("Login With Google"))
+            ElevatedButton(
+              onPressed: () async {
+                initiateLogin(context);
+              },
+              child: const Text("Login With Google"),
+            ),
           ],
         ),
       ),
+    );
+  }
+}
+
+void initiateLogin(BuildContext context) async {
+  final pb = PocketBase('https://erp-back.fly.dev/');
+  final authData =
+      await pb.collection('users').authWithOAuth2('google', (url) async {
+    print(url);
+    await launchUrl(url);
+  });
+
+  // Check if authentication was successful
+  if (authData != null) {
+    // Navigate to the home page
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => HomePage()),
     );
   }
 }
