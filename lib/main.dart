@@ -31,7 +31,7 @@ class Login extends StatelessWidget {
             ),
             const Text(
               "Welcome to ERP",
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
             const Text("A simple way to track you attendance"),
             const SizedBox(
