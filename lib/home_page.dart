@@ -1,48 +1,77 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:go_router/go_router.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          textTheme: GoogleFonts.poppinsTextTheme(ThemeData.light().textTheme),
-          brightness: Brightness.light,
-          colorSchemeSeed: Colors.deepPurple,
-          useMaterial3: true,
+    return Scaffold(
+      appBar: AppBar(
+          title: const Text(
+        'Home',
+        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+      )),
+      floatingActionButton: FloatingActionButton(
+          child: const Icon(Icons.settings),
+          onPressed: () {
+            context.go('/settings');
+          }),
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ProgBar('Java', 0.5),
+            ProgBar('Open Source Technologies', 0.2),
+            ProgBar('Data Structures', 0.4),
+            ProgBar('Financial Accounting', 0.8),
+            ProgBar('C', 0.7),
+            ProgBar('Soft Skills', 0.6),
+            const SizedBox(
+              height: 50,
+            ),
+            const Cards(),
+          ],
         ),
-        darkTheme: ThemeData(
-          textTheme: GoogleFonts.poppinsTextTheme(ThemeData.dark().textTheme),
-          useMaterial3: true,
-          brightness: Brightness.dark,
-          colorSchemeSeed: Colors.deepPurple,
-        ),
-        home: Scaffold(
-          appBar: AppBar(
-              title: const Text(
-            'Home',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-          )),
-          body: Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ProgBar('Java', 0.5),
-                  ProgBar('Open Source Technologies', 0.2),
-                  ProgBar('Data Structures', 0.4),
-                  ProgBar('Financial Accounting', 0.8),
-                  ProgBar('C', 0.7),
-                  ProgBar('Soft Skills', 0.6),
-                  const SizedBox(
-                    height: 50,
-                  ),
-                  const Text('Days Absent : 10'),
-                ],
-              )),
-        ));
+      ),
+    );
+  }
+}
+
+class Cards extends StatelessWidget {
+  const Cards({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Row(
+        children: [
+          const SizedBox(
+            width: 32,
+          ),
+          Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15.0),
+                color: Theme.of(context).colorScheme.primaryContainer),
+            height: 50,
+            width: 150,
+            child: const Center(child: Text('Days Present : 30')),
+          ),
+          const SizedBox(
+            width: 10,
+          ),
+          Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15.0),
+                color: Theme.of(context).colorScheme.secondaryContainer),
+            height: 50,
+            width: 150,
+            child: const Center(child: Text('Days Absent : 10')),
+          ),
+        ],
+      ),
+    );
   }
 }
 

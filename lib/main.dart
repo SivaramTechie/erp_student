@@ -1,8 +1,29 @@
+import 'package:erp_student/students_settings.dart';
 import 'package:flutter/material.dart';
 import 'login_page.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:go_router/go_router.dart';
+import 'home_page.dart';
+import 'package:pocketbase/pocketbase.dart';
 
-void main() => runApp(MaterialApp(
+final pb = PocketBase('https://erp-back.fly.dev/');
+final _router = GoRouter(
+  routes: [
+    GoRoute(
+      path: '/',
+      builder: (context, state) => Login(),
+    ),
+    GoRoute(
+      path: '/home',
+      builder: (context, state) => HomePage(),
+    ),
+    GoRoute(
+      path: '/settings',
+      builder: (context, state) => Settings(),
+    ),
+  ],
+);
+void main() => runApp(MaterialApp.router(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         textTheme: GoogleFonts.poppinsTextTheme(ThemeData.light().textTheme),
@@ -16,5 +37,5 @@ void main() => runApp(MaterialApp(
         brightness: Brightness.dark,
         colorSchemeSeed: Colors.deepPurple,
       ),
-      home: const Login(),
+      routerConfig: _router,
     ));

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:pocketbase/pocketbase.dart';
+import 'package:go_router/go_router.dart';
+
 import 'package:url_launcher/url_launcher.dart';
-import 'home_page.dart';
+
+import 'main.dart';
 
 class Login extends StatelessWidget {
   const Login({Key? key});
@@ -13,23 +15,29 @@ class Login extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Image.asset('assets/images/img_login.png'),
+            Image.asset('assets/images/img_user.png'),
             const SizedBox(
               height: 15,
             ),
             const Text(
-              "Welcome to ERP",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              "Welcome to Students ERP",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+            ),
+            const SizedBox(
+              height: 5,
             ),
             const Text("A simple way to track your attendance"),
             const SizedBox(
               height: 30,
             ),
-            ElevatedButton(
+            FilledButton(
               onPressed: () async {
                 initiateLogin(context);
               },
-              child: const Text("Login With Google"),
+              child: const Text("Login With Google",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w300,
+                  )),
             ),
           ],
         ),
@@ -39,19 +47,15 @@ class Login extends StatelessWidget {
 }
 
 void initiateLogin(BuildContext context) async {
-  final pb = PocketBase('https://erp-back.fly.dev/');
   final authData =
       await pb.collection('users').authWithOAuth2('google', (url) async {
     print(url);
     await launchUrl(url);
   });
 
-  // Check if authentication was successful
   if (authData != null) {
-    // Navigate to the home page
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => HomePage()),
+    context.go(
+      '/home',
     );
   }
 }
