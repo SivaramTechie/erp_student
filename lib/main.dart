@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'home_page.dart';
 import 'package:pocketbase/pocketbase.dart';
 
-final pb = PocketBase('https://erp-back.fly.dev/');
+final pb = PocketBase('https://erp-backto.fly.dev/');
 final _router = GoRouter(
   routes: [
     GoRoute(
@@ -24,6 +24,7 @@ final _router = GoRouter(
   ],
 );
 void main() => runApp(MaterialApp.router(
+      title: 'Atendaze',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         textTheme: GoogleFonts.poppinsTextTheme(ThemeData.light().textTheme),

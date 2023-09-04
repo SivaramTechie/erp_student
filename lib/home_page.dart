@@ -1,3 +1,4 @@
+import 'package:erp_student/students_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -22,6 +23,13 @@ class HomePage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Text(
+              '👋 Hey $name',
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(
+              height: 20,
+            ),
             ProgBar('Java', 0.5),
             ProgBar('Open Source Technologies', 0.2),
             ProgBar('Data Structures', 0.4),

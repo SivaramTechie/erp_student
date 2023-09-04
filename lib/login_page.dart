@@ -20,7 +20,7 @@ class Login extends StatelessWidget {
               height: 15,
             ),
             const Text(
-              "Welcome to Students ERP",
+              "Atendaze",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
             ),
             const SizedBox(
@@ -34,10 +34,9 @@ class Login extends StatelessWidget {
               onPressed: () async {
                 initiateLogin(context);
               },
-              child: const Text("Login With Google",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w300,
-                  )),
+              child: const Text(
+                "Login With Google",
+              ),
             ),
           ],
         ),
